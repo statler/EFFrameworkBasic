@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper.QueryableExtensions;
+using System;
+using System.Linq;
 
 namespace EF6CodeFirstDemo
 {
@@ -12,6 +14,9 @@ namespace EF6CodeFirstDemo
 
                 ctx.Students.Add(student);
                 ctx.SaveChanges();
+                Console.WriteLine(ctx.Students.Count().ToString());
+                var _lst = ctx.Students.ProjectTo<StudentDto>(AutomapperConfig.mapper.ConfigurationProvider).ToList();
+                Console.WriteLine(_lst.ToString());
             }
             Console.WriteLine("Demo completed.");
             Console.ReadLine();
